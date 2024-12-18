@@ -12,10 +12,10 @@ type Action={
 }
 
 export const initialUser:User= {
-    firstName: "",
+    firstName: "racheli",
     lastName:"",
     mail:"",
-    password:"",
+    password:"1234",
     address:"",
     phone:""
 }

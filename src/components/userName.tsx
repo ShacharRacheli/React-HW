@@ -11,7 +11,6 @@ const UserName=()=>{
 
     const [showUpdate,setShowUpdate]=useState(false)
     const user1=useContext(UserContext)
-    user1.user?.firstName
     // const letter=user1.user?.firstName.charAt(0)
     const handleShowUpdate=()=>{
     setShowUpdate(true)
@@ -22,7 +21,7 @@ const handleCloseUpdate=()=>{
     return(
         <Box sx={{position: 'absolute', top: 10, left: 10 }}>
         <Stack direction="row" spacing={2}>
-      <Avatar sx={{ bgcolor: deepPurple[300] }} alt={user1.user?.firstName} src="../pictures/IMG_3691.JPG"/>
+      <Avatar alt={user1.user?.firstName} src="../pictures/IMG_3691.JPG" sx={{ bgcolor: deepPurple[300] }}/>
       <Typography variant="h4">
   Hi {user1.user?.firstName}!
 </Typography>

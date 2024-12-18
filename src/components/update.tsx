@@ -22,6 +22,7 @@ export default function Update({succeedUpdateFunc}:{succeedUpdateFunc:Function})
     const [open, setOpen] = useState(true);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const nameRef = useRef<HTMLInputElement>(null)
     const emailRef = useRef<HTMLInputElement>(null)
     const addressRef = useRef<HTMLInputElement>(null)
     const phoneRef = useRef<HTMLInputElement>(null)
@@ -49,6 +50,7 @@ export default function Update({succeedUpdateFunc}:{succeedUpdateFunc:Function})
             >
                 <Box sx={style}>
                     <form onSubmit={handleSubmit}>
+                         <TextField fullWidth label="Update first name" variant="outlined" inputRef={nameRef} />
                          <TextField fullWidth label="Update email" variant="outlined" inputRef={emailRef} />
                          <TextField fullWidth label="Update address" variant="outlined" inputRef={addressRef} />
                          <TextField fullWidth label="Update phone" variant="outlined" inputRef={phoneRef} />

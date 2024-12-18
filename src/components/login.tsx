@@ -30,7 +30,8 @@ export default function BasicModal({ succeedFunc }: { succeedFunc: Function }) {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
-    user1.userDispatch({
+    if(user1.user?.firstName===nameRef.current?.value)
+    {user1.userDispatch({
       type: 'Create',
       data: {
         firstName: nameRef.current?.value,
@@ -39,7 +40,7 @@ export default function BasicModal({ succeedFunc }: { succeedFunc: Function }) {
       }
     })
     handleClose()
-    succeedFunc()
+    succeedFunc()}
   }
   return (
     <div>
