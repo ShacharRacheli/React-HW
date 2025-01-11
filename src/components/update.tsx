@@ -4,7 +4,6 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import { TextField } from "@mui/material";
-
 const style = {
     position: 'absolute',
     top: '50%',
@@ -15,8 +14,7 @@ const style = {
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
-};
-
+  };
 
 export default function Update({succeedUpdateFunc}:{succeedUpdateFunc:Function}){
     const [open, setOpen] = useState(true);
@@ -33,6 +31,7 @@ export default function Update({succeedUpdateFunc}:{succeedUpdateFunc:Function})
         user1.userDispatch({
             type: 'Update',
             data: {
+                firstName:nameRef.current?.value,
                 mail: emailRef.current?.value,
                 address: addressRef.current?.value,
                 phone: phoneRef.current?.value
@@ -50,10 +49,10 @@ export default function Update({succeedUpdateFunc}:{succeedUpdateFunc:Function})
             >
                 <Box sx={style}>
                     <form onSubmit={handleSubmit}>
-                         <TextField fullWidth label="Update first name" variant="outlined" inputRef={nameRef} />
-                         <TextField fullWidth label="Update email" variant="outlined" inputRef={emailRef} />
-                         <TextField fullWidth label="Update address" variant="outlined" inputRef={addressRef} />
-                         <TextField fullWidth label="Update phone" variant="outlined" inputRef={phoneRef} />
+                         <TextField type='text' fullWidth label="Update first name" variant="outlined" inputRef={nameRef} />
+                         <TextField type='email'fullWidth label="Update email" variant="outlined" inputRef={emailRef} />
+                         <TextField type='text'fullWidth label="Update address" variant="outlined" inputRef={addressRef} />
+                         <TextField type='text'fullWidth label="Update phone" variant="outlined" inputRef={phoneRef} />
                         <Button fullWidth type='submit'>Save</Button>
                     </form>
                 </Box>

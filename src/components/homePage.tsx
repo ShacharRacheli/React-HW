@@ -1,7 +1,8 @@
 import { createContext, Dispatch, useReducer, useState } from "react"
-import BasicModal from "./login"
+// import BasicModal from "./login"
 import { initialUser, User, userReducer } from "./user"
 import UserName from "./userName";
+import Login from "./login";
 
 
 // let defaultUser=User 
@@ -14,7 +15,7 @@ const HomePage=()=>{
 
 return(
 <UserContext.Provider value={{user,userDispatch}}>
-  { !succeed&& <BasicModal succeedFunc={LoginSucceed}/>}
+  { !succeed&& <Login succeedFunc={LoginSucceed}/>}
    {succeed&& <UserName/>}
 </UserContext.Provider>
 );   

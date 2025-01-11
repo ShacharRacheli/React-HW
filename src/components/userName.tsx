@@ -11,12 +11,13 @@ const UserName=()=>{
 
     const [showUpdate,setShowUpdate]=useState(false)
     const user1=useContext(UserContext)
+    // const {user1}=user12
     // const letter=user1.user?.firstName.charAt(0)
     const handleShowUpdate=()=>{
     setShowUpdate(true)
 }
 const handleCloseUpdate=()=>{
-    setShowUpdate(false)
+    setShowUpdate(false);
 }
     return(
         <Box sx={{position: 'absolute', top: 10, left: 10 }}>

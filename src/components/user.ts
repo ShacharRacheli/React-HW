@@ -12,22 +12,25 @@ type Action={
 }
 
 export const initialUser:User= {
-    firstName: "racheli",
+    firstName: "",
     lastName:"",
     mail:"",
-    password:"1234",
+    password:"",
     address:"",
     phone:""
 }
-export const userReducer=(
-    state:User,action:Action):User=>{
+export const userReducer=(state:User,action:Action):User=>{
         const {firstName,lastName,password}=action.data as Partial<User>
         switch(action.type){
             case 'Create':
-                state.firstName=firstName,
-                state.lastName=lastName,
-                state.password=password
-                return state
+                return{
+                firstName:firstName||'',
+                lastName:lastName||'',
+                password:password||'',
+                address:'',
+                mail:'',
+                phone:''
+                }
             case 'Update':
                 return {
                     firstName:action.data.firstName||state.firstName,
