@@ -3,10 +3,12 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import { FormEvent, useContext, useRef, useState } from 'react';
-import { UserContext } from './homePage';
+import { IdContext, UserContext } from './homePage';
 import UserName from './userName';
-import {  TextField } from '@mui/material';
+import { Paper, styled, TextField } from '@mui/material';
 import Grid from '@mui/material/Grid2';
+import { initialUser } from './user';
+import axios from 'axios';
 
 const style = {
   position: 'absolute',
@@ -29,89 +31,78 @@ export default function Login({ succeedFunc }: { succeedFunc: Function }) {
   const lastNameRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
   const user1 = useContext(UserContext)
-
-  const handleSubmit = async(e: FormEvent) => {
+  const [id, setId] = useContext(IdContext)
+  let status=''
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-if(logIn)
-  {  try{
-      const res = await fetch('http://localhost:3000/api/user/login',
-      {
-        method: 'POST',
-        body:JSON.stringify({
+    if(logIn)
+     {  status="login";}
+    else {
+status="register"
+    }
+    // if (logIn) {
+      try {
+        const res = await axios.post(`http://localhost:3000/api/user/${status}`, {
           firstName: nameRef.current?.value,
           lastName: lastNameRef.current?.value,
-          password: passwordRef.current?.value
-  }),
-  headers: { 'Content-Type': 'application/json' }
+          password: passwordRef.current?.value,
+        })
+        console.log(res);
+        setId(res.data.user?.id||res.data.userId)
+        user1.userDispatch({
+          type: 'Create',
+          data: {
+            firstName: nameRef.current?.value,
+            lastName: lastNameRef.current?.value,
+            password: passwordRef.current?.value,
+          }
+        })
       }
-      )
-      if(res.status===401){alert('name or password are not correct')}
-   else if (!res.ok){ throw new Error(`fetch error ${res.status}`)}
-    // const data=await res.json()
-    user1.userDispatch({
-      type:'Create',
-      data:{firstName: nameRef.current?.value,
-      lastName: lastNameRef.current?.value,
-      password: passwordRef.current?.value,}
-    })
-    // handleClose()
-    // succeedFunc()
-  }
-  catch(e){
-    console.log(e);
-  }}
-  else{
-    try{
-      const res = await fetch('http://localhost:3000/api/user/register',
-      {
-        method: 'POST',
-        body:JSON.stringify({
-          firstName: nameRef.current?.value,
-          lastName: lastNameRef.current?.value,
-          password: passwordRef.current?.value
-  }),
-  headers: { 'Content-Type': 'application/json' }
+      catch (e: any) {
+        console.log(e);
+        if (e.response && e.response === 401 || e.response === 400) { alert('name or password are not correct') }
       }
-      )
-  //     if(res.status===401){alert('name or password are not correct')}
-   if (!res.ok){ throw new Error(`fetch error ${res.status}`)}
-    // const data=await res.json()
-    user1.userDispatch({
-      type:'Create',
-      data:{
-        firstName: nameRef.current?.value,
-        lastName: lastNameRef.current?.value,
-        password: passwordRef.current?.value
-}
-    })
-  }
-  catch(e){
-    console.log(e);
-  }
-}
-handleClose()
-succeedFunc()
-setLogIn(false)
-    // if(user1.user?.firstName===nameRef.current?.value)
-    // {user1.userDispatch({
-    //   type: 'Create',
-    //   data: {
-    //     firstName: nameRef.current?.value,
-    //     lastName: lastNameRef.current?.value,
-    //     password: passwordRef.current?.value
+    // }
+
+    // else {
+    //   try { 
+    //     const res = await axios.post('http://localhost:3000/api/user/register', {
+    //       firstName: nameRef.current?.value,
+    //       lastName: lastNameRef.current?.value,
+    //       password: passwordRef.current?.value,
+    //     })
+    //     console.log(res);
+    //     user1.userDispatch({
+    //       type: 'Create',
+    //       data: {
+    //         firstName: nameRef.current?.value,
+    //         lastName: lastNameRef.current?.value,
+    //         password: passwordRef.current?.value,
+    //       }
+    //     })
+    //     setId(res.data.userId)
     //   }
-    // })
+    //   catch (e: any) {
+    //     console.log(e);
+    //     if ((e.response && e.response === 401) || e.response === 400)
+    //        { alert('name or password already exist') }
+    //   // }
+    // }
+
+
+    handleClose()
+    succeedFunc()
+    setLogIn(false)
   }
-  
+
   return (
     <div>
-        <Box sx={{position: 'absolute', top: 10, left: 10 }}>
-     
-      {/* <Grid size={{xs:4}} top={0}left={0}> */}
-      <Button onClick={()=>{setLogIn(true);setOpen(true);}} >Login</Button>
-      <Button onClick={handleOpen}>Register</Button>
-     </Box>
-      {/* </Grid> */}
+      <Box sx={{ position: 'absolute', top: 10, left: 10 }}>
+      {/* <Grid size={4}> */}
+        <Button onClick={() => { setLogIn(true); setOpen(true); }} >Login</Button>
+        <Button onClick={handleOpen}>Register</Button>
+        {/* </Grid> */}
+      </Box>
       <Modal
         open={open}
         onClose={handleClose}
@@ -127,5 +118,5 @@ setLogIn(false)
       </Modal>
     </div>
   );
- }
+}
 

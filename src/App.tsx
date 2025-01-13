@@ -3,14 +3,21 @@ import './App.css'
 import HomePage from './components/homePage'
 import { MyRouter } from './Router'
 import { Box } from '@mui/material'
+import Grid from '@mui/material/Grid2';
 
 function App() {
 
   return (
     <>
-      <HomePage/>
-     <Box sx={{position: 'absolute', top: 150, left: 10}}>
-      <RouterProvider router={MyRouter}/>
+      <Box>
+        <Grid container spacing={2} justifyContent="center" alignItems="center" style={{ height: '100vh' }}>
+          <Grid >
+            <HomePage />
+          </Grid>
+          <Grid >
+            <RouterProvider router={MyRouter} />
+          </Grid>
+        </Grid>
       </Box>
     </>
   )
