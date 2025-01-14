@@ -8,7 +8,7 @@ import Grid from '@mui/material/Grid2';
 
 // let defaultUser=User 
 export const UserContext=createContext<{user:User|null;userDispatch:Dispatch<any>}>({user:null,userDispatch:()=>{}})
-export const IdContext=createContext<[Number,Dispatch<SetStateAction<Number>>]>([0,() => {},]);
+export const IdContext=createContext<[Number,Dispatch<SetStateAction<Number>>]>([0,() => {}]);
 const HomePage=()=>{
 
     const [succeed,setSucceed]=useState(false)

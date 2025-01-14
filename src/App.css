@@ -40,3 +40,8 @@
 .read-the-docs {
   color: #888;
 }
+
+/* הגדרת משתנים ב-root */ 
+:root { --primary-color: rgb(232, 7, 108); /* צבע ראשי */ 
+  --secondary-color: rgb(251, 0, 172); /* צבע משני */
+ }

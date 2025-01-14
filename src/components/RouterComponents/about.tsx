@@ -1,20 +1,14 @@
 import Grid from '@mui/material/Grid2';
 import { Outlet } from "react-router";
 import Typography from '@mui/material/Typography';
+import { Box } from "@mui/material";
 
 const About = () => {
     return (
-        <Grid 
-        container 
-        justifyContent="center" 
-        alignItems="center" 
-        style={{ minHeight: '100vh' }} // Full viewport height
-    >
-        <Grid >
+            <Box  style={{color: 'var(--primary-color)', }} >
             <Typography variant="h1" align="center">About</Typography>
             <Outlet />
-        </Grid>
-    </Grid>
+        </Box>
     );
 }
 

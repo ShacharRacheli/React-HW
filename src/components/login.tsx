@@ -32,65 +32,67 @@ export default function Login({ succeedFunc }: { succeedFunc: Function }) {
   const passwordRef = useRef<HTMLInputElement>(null)
   const user1 = useContext(UserContext)
   const [id, setId] = useContext(IdContext)
-  let status=''
+  let status = ''
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    if(logIn)
-     {  status="login";}
+    if (logIn) { status = "login"; }
     else {
-status="register"
+      status = "register"
     }
     // if (logIn) {
-      try {
-        const res = await axios.post(`http://localhost:3000/api/user/${status}`, {
+    try {
+      const res = await axios.post(`http://localhost:3000/api/user/${status}`, {
+        firstName: nameRef.current?.value,
+        lastName: lastNameRef.current?.value,
+        password: passwordRef.current?.value,
+      })
+      console.log(res);
+      setId(res.data.user?.id || res.data.userId)
+      user1.userDispatch({
+        type: 'Create',
+        data: {
           firstName: nameRef.current?.value,
           lastName: lastNameRef.current?.value,
           password: passwordRef.current?.value,
-        })
-        console.log(res);
-        setId(res.data.user?.id||res.data.userId)
-        user1.userDispatch({
-          type: 'Create',
-          data: {
-            firstName: nameRef.current?.value,
-            lastName: lastNameRef.current?.value,
-            password: passwordRef.current?.value,
-          }
-        })
-      }
-      catch (e: any) {
-        console.log(e);
+        }
+      })
+    }
+    catch (e: any) {
+      console.log(e);
+      if (logIn) {
         if (e.response && e.response === 401 || e.response === 400) { alert('name or password are not correct') }
       }
+      else {
+        if ((e.response && e.response === 401) || e.response === 400) { alert('name or password already exist') }
+      }
+    }
     // }
-
+    
     // else {
-    //   try { 
-    //     const res = await axios.post('http://localhost:3000/api/user/register', {
-    //       firstName: nameRef.current?.value,
-    //       lastName: lastNameRef.current?.value,
-    //       password: passwordRef.current?.value,
-    //     })
-    //     console.log(res);
-    //     user1.userDispatch({
-    //       type: 'Create',
-    //       data: {
-    //         firstName: nameRef.current?.value,
-    //         lastName: lastNameRef.current?.value,
-    //         password: passwordRef.current?.value,
-    //       }
-    //     })
-    //     setId(res.data.userId)
-    //   }
-    //   catch (e: any) {
-    //     console.log(e);
-    //     if ((e.response && e.response === 401) || e.response === 400)
-    //        { alert('name or password already exist') }
-    //   // }
-    // }
-
-
-    handleClose()
+      //   try { 
+        //     const res = await axios.post('http://localhost:3000/api/user/register', {
+          //       firstName: nameRef.current?.value,
+          //       lastName: lastNameRef.current?.value,
+          //       password: passwordRef.current?.value,
+          //     })
+          //     console.log(res);
+          //     user1.userDispatch({
+            //       type: 'Create',
+            //       data: {
+              //         firstName: nameRef.current?.value,
+              //         lastName: lastNameRef.current?.value,
+              //         password: passwordRef.current?.value,
+              //       }
+              //     })
+              //     setId(res.data.userId)
+              //   }
+              //   catch (e: any) {
+                //     console.log(e);
+                //     if ((e.response && e.response === 401) || e.response === 400)
+                //        { alert('name or password already exist') }
+                //   // }
+                // }
+                handleClose()
     succeedFunc()
     setLogIn(false)
   }
@@ -98,21 +100,22 @@ status="register"
   return (
     <div>
       <Box sx={{ position: 'absolute', top: 10, left: 10 }}>
-      {/* <Grid size={4}> */}
-        <Button onClick={() => { setLogIn(true); setOpen(true); }} >Login</Button>
-        <Button onClick={handleOpen}>Register</Button>
+        {/* <Grid size={4}> */}
+        <Button onClick={() => { setLogIn(true); setOpen(true); }}sx={{color:'var(--secondary-color)'}} >Login</Button>
+        <Button onClick={handleOpen}sx={{color:'var(--secondary-color)'}} >Register</Button>
         {/* </Grid> */}
       </Box>
       <Modal
         open={open}
         onClose={handleClose}
+      
       >
         <Box sx={style}>
           <form onSubmit={handleSubmit}>
             <TextField type='text' fullWidth label="First Name" variant="outlined" inputRef={nameRef} />
             <TextField type='text' fullWidth label='Last name' variant="outlined" inputRef={lastNameRef} />
             <TextField type='password' fullWidth label='Password' variant="outlined" inputRef={passwordRef} />
-            <Button fullWidth type='submit' >send</Button>
+            <Button fullWidth type='submit'sx={{color:'var(--secondary-color)'}}  >send</Button>
           </form>
         </Box>
       </Modal>

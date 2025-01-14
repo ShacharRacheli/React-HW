@@ -77,7 +77,7 @@ export default function Update({ succeedUpdateFunc }: { succeedUpdateFunc: Funct
                         <TextField type='email' fullWidth label="Update email" variant="outlined" inputRef={emailRef} />
                         <TextField type='text' fullWidth label="Update address" variant="outlined" inputRef={addressRef} />
                         <TextField type='text' fullWidth label="Update phone" variant="outlined" inputRef={phoneRef} />
-                        <Button fullWidth type='submit'>Save</Button>
+                        <Button fullWidth type='submit'sx={{color:'var(--secondary-color)'}} >Save</Button>
                     </form>
                 </Box>
             </Modal>
