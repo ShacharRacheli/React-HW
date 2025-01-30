@@ -1,5 +1,5 @@
 import { FormEvent, useContext, useRef, useState } from "react";
-import { IdContext, UserContext } from "./homePage";
+import { IdContext, UserContext } from "../homePage";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';

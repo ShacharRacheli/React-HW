@@ -3,13 +3,9 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import { FormEvent, useContext, useRef, useState } from 'react';
-import { IdContext, UserContext } from './homePage';
-import UserName from './userName';
-import { Paper, styled, TextField } from '@mui/material';
-import Grid from '@mui/material/Grid2';
-import { initialUser } from './user';
+import { IdContext, UserContext } from '../homePage';
+import {   TextField } from '@mui/material';
 import axios from 'axios';
-
 const style = {
   position: 'absolute',
   top: '50%',
@@ -21,7 +17,6 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-
 export default function Login({ succeedFunc }: { succeedFunc: Function }) {
   const [open, setOpen] = useState(false);
   const [logIn, setLogIn] = useState(false);
@@ -107,8 +102,7 @@ export default function Login({ succeedFunc }: { succeedFunc: Function }) {
       </Box>
       <Modal
         open={open}
-        onClose={handleClose}
-      
+        onClose={handleClose}      
       >
         <Box sx={style}>
           <form onSubmit={handleSubmit}>

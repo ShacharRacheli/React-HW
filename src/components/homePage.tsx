@@ -1,9 +1,11 @@
 import { createContext, Dispatch, SetStateAction, useReducer, useState } from "react"
 // import BasicModal from "./login"
-import { initialUser, User, userReducer } from "./user"
-import UserName from "./userName";
-import Login from "./login";
+import { initialUser, User, userReducer } from "./User/user"
+import UserName from "./User/userName";
 import Grid from '@mui/material/Grid2';
+import Login from "./User/login";
+import AllRecipes from "./Recipes/allRecipes";
+import AddRecipe from "./Recipes/addRecipe";
 
 
 // let defaultUser=User 
@@ -20,14 +22,20 @@ const HomePage=()=>{
 return(
   <Grid container >
   {/* <Grid  size={4}> */}
-<UserContext.Provider value={{user,userDispatch}}>
-  <IdContext.Provider value={[id,setId]}>
+<UserContext value={{user,userDispatch}}>
+  <IdContext value={[id,setId]}>
   { !succeed&& <Login succeedFunc={LoginSucceed} />}
    {succeed&& <UserName/>}
-   </IdContext.Provider>
-</UserContext.Provider>
+
+{succeed&&<AddRecipe/>}
+   </IdContext>
+</UserContext>
+{/* <Grid size={6}> */}
+{/* <AllRecipes/> */}
+{/* </Grid> */}
+{/* <AddRecipe/> */}
 </Grid>
-// </Grid>
+
 );   
 
 };
