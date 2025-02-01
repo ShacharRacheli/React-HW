@@ -1,20 +1,14 @@
 import axios from "axios"
 import { makeAutoObservable } from "mobx"
-import { useContext } from "react"
-import { IdContext } from "../homePage"
-
 export type RecipeType = {
     id: number,
     title: string,
-    // products:string[],
     description: string,
     authorId: Number,
     ingredients: string[],
     instructions: string,
 }
 class RecipeStore {
-    // const[id] = useContext(IdContext)
-
     list: RecipeType[] = []
     constructor() {
         makeAutoObservable(this)
@@ -23,15 +17,13 @@ class RecipeStore {
     async getAllRecipes() {
         try {
             const res = await axios.get(`http://localhost:3000/api/recipes`, {})
-            console.log(res.data);
             this.list = res.data
-            //   return this.list
         }
         catch (e: any) {
-            if (e.response && e.response === 401 || e.response === 400) { alert('errorrrrrr') }
-            //   if(e.response&&e.response===403){
-            //     alert(``)
-            //   }
+            if (e.status === 401 || e.response === 403 || e.response === 4000)
+                alert("User Not found")
+              if (e.status === 403)
+                  alert('problem in connection')            
         }
     }
     async addNewRecipe(recipe: Partial< RecipeType>,id:number) {
@@ -44,15 +36,40 @@ class RecipeStore {
             },{
                 headers: { 'user-id': id + "" }
             })
+            this.list.push(res.data.recipe)
         }
         catch (e: any) {
-            if (e.response && e.response === 401 || e.response === 400) { alert('errorrrrrr') }
+            if (e.status === 401 || e.response === 403 || e.response === 4000)
+                alert("User Not found")
+              if (e.status === 403)
+                  alert('problem in connection')            
         }
-        this.getAllRecipes()
     }
+    async updateRecipe(recipe:Partial<RecipeType>,id:number){
+        try {
+            const res = await axios.put('http://localhost:3000/api/recipes', {
+                title: recipe.title,
+                description: recipe.description,
+                ingredients: recipe.ingredients,
+                instructions: recipe.instructions,
+            },{
+                headers: { 'recipe-id': id+ "" }
+            })
+            this.list = this.list.map(r => (r.id === id ? res.data : r));        
+        }
+        catch (e: any) {
+            if (e.status === 401 || e.response === 403 || e.response === 4000)
+                alert("User Not found")
+            if (e.status === 403)
+                alert('problem in connection')
+            console.log(e);
+        }
+    }    
     getRecipeById(id:number):RecipeType|undefined{
         return this.list.find(r=>r.id===id)
     }
-
+    updateRecipeList(authorId:number):RecipeType[]{
+        return this.list.filter(r=>+r.authorId===+authorId);
+}
 }
 export default new RecipeStore()

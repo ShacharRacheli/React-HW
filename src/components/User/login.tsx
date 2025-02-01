@@ -1,11 +1,10 @@
-
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import { FormEvent, useContext, useRef, useState } from 'react';
-import { IdContext, UserContext } from '../homePage';
-import {   TextField } from '@mui/material';
+import { TextField } from '@mui/material';
 import axios from 'axios';
+import { IdContext, UserContext } from '../RouterComponents/appLayout';
 const style = {
   position: 'absolute',
   top: '50%',
@@ -34,7 +33,6 @@ export default function Login({ succeedFunc }: { succeedFunc: Function }) {
     else {
       status = "register"
     }
-    // if (logIn) {
     try {
       const res = await axios.post(`http://localhost:3000/api/user/${status}`, {
         firstName: nameRef.current?.value,
@@ -61,55 +59,26 @@ export default function Login({ succeedFunc }: { succeedFunc: Function }) {
         if ((e.response && e.response === 401) || e.response === 400) { alert('name or password already exist') }
       }
     }
-    // }
-    
-    // else {
-      //   try { 
-        //     const res = await axios.post('http://localhost:3000/api/user/register', {
-          //       firstName: nameRef.current?.value,
-          //       lastName: lastNameRef.current?.value,
-          //       password: passwordRef.current?.value,
-          //     })
-          //     console.log(res);
-          //     user1.userDispatch({
-            //       type: 'Create',
-            //       data: {
-              //         firstName: nameRef.current?.value,
-              //         lastName: lastNameRef.current?.value,
-              //         password: passwordRef.current?.value,
-              //       }
-              //     })
-              //     setId(res.data.userId)
-              //   }
-              //   catch (e: any) {
-                //     console.log(e);
-                //     if ((e.response && e.response === 401) || e.response === 400)
-                //        { alert('name or password already exist') }
-                //   // }
-                // }
-                handleClose()
+    handleClose()
     succeedFunc()
     setLogIn(false)
   }
-
   return (
     <div>
       <Box sx={{ position: 'absolute', top: 10, left: 10 }}>
-        {/* <Grid size={4}> */}
-        <Button onClick={() => { setLogIn(true); setOpen(true); }}sx={{color:'var(--secondary-color)'}} >Login</Button>
-        <Button onClick={handleOpen}sx={{color:'var(--secondary-color)'}} >Register</Button>
-        {/* </Grid> */}
+        <Button onClick={() => { setLogIn(true); setOpen(true); }} sx={{ color: 'var(--secondary-color)' }} >Login</Button>
+        <Button onClick={handleOpen} sx={{ color: 'var(--secondary-color)' }} >Register</Button>
       </Box>
       <Modal
         open={open}
-        onClose={handleClose}      
+        onClose={handleClose}
       >
         <Box sx={style}>
           <form onSubmit={handleSubmit}>
             <TextField type='text' fullWidth label="First Name" variant="outlined" inputRef={nameRef} />
             <TextField type='text' fullWidth label='Last name' variant="outlined" inputRef={lastNameRef} />
             <TextField type='password' fullWidth label='Password' variant="outlined" inputRef={passwordRef} />
-            <Button fullWidth type='submit'sx={{color:'var(--secondary-color)'}}  >send</Button>
+            <Button fullWidth type='submit' sx={{ color: 'var(--secondary-color)' }}  >send</Button>
           </form>
         </Box>
       </Modal>

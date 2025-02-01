@@ -10,7 +10,6 @@ type Action={
     type:'Create'|'Delete'|'Update'
     data:Partial<User>
 }
-
 export const initialUser:User= {
     firstName: "",
     lastName:"",
@@ -40,8 +39,6 @@ export const userReducer=(state:User,action:Action):User=>{
                     address:action.data.address||state.address,
                     phone:action.data.phone||state.phone,
                 }
-
-            // case 'Delete':
             default:
                 return state
         }

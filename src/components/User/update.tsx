@@ -1,10 +1,10 @@
 import { FormEvent, useContext, useRef, useState } from "react";
-import { IdContext, UserContext } from "../homePage";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import { TextField } from "@mui/material";
 import axios from "axios";
+import { IdContext, UserContext } from "../RouterComponents/appLayout";
 const style = {
     position: 'absolute',
     top: '50%',
@@ -16,10 +16,8 @@ const style = {
     boxShadow: 24,
     p: 4,
 };
-
 export default function Update({ succeedUpdateFunc }: { succeedUpdateFunc: Function }) {
     const [open, setOpen] = useState(true);
-    const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const nameRef = useRef<HTMLInputElement>(null)
     const lastNameRef = useRef<HTMLInputElement>(null)   
@@ -62,8 +60,6 @@ export default function Update({ succeedUpdateFunc }: { succeedUpdateFunc: Funct
             console.log(e);
         }
     }
-
-
     return (
         <div>
             <Modal

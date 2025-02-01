@@ -9,16 +9,7 @@ function App() {
 
   return (
     <>
-      <Box>
-        <Grid container spacing={2} justifyContent="center" alignItems="center" style={{ height: '100vh' }}>
-          <Grid >
-            <HomePage />
-          </Grid>
-          <Grid >
-            <RouterProvider router={MyRouter} />
-          </Grid>
-        </Grid>
-      </Box>
+               <RouterProvider router={MyRouter} />
     </>
   )
 }

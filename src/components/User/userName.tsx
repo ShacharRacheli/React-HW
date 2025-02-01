@@ -1,14 +1,10 @@
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import { useContext, useState } from 'react';
-import { UserContext } from '../homePage';
 import { Box, Button, Typography } from '@mui/material';
 import Update from './update';
-import { deepPurple } from '@mui/material/colors';
-
-
+import { UserContext } from '../RouterComponents/appLayout';
 const UserName = () => {
-
     const [showUpdate, setShowUpdate] = useState(false)
     const user1 = useContext(UserContext)
     const handleShowUpdate = () => {
@@ -25,8 +21,6 @@ const UserName = () => {
             children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
         };
     }
-
-
     return (
         <Box sx={{ position: 'absolute', top: 10, left: 10 }}>
             <Stack direction="row" spacing={2}>
