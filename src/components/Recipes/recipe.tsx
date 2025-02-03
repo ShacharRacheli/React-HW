@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import { Button } from "@mui/material";
-import { RecipeType } from "./recipeStore";
+import { RecipeType } from "../store/recipeStore";
 import { useNavigate } from "react-router";
 const Recipe = observer(({ recipe }: { recipe: RecipeType }) => {
     const navigate = useNavigate();

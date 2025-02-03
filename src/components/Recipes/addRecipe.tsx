@@ -1,6 +1,6 @@
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
-import recipeStore, { RecipeType } from "./recipeStore"
+import recipeStore, { RecipeType } from "../store/recipeStore"
 import { array, object, string } from "yup"
 import { Box, Button, Modal, TextField, Typography } from "@mui/material"
 import { useContext, useState } from "react"

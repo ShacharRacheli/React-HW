@@ -1,5 +1,5 @@
 import { Box, Button, Typography } from "@mui/material";
-import recipeStore, { RecipeType } from "./recipeStore";
+import recipeStore, { RecipeType } from "../store/recipeStore";
 import { useContext, useState } from "react";
 import { observer } from "mobx-react-lite";
 import UpdateRecipe from "./updateRecipe";

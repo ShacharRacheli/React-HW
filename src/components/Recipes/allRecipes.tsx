@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 import Grid from '@mui/material/Grid2';
 import { Box, Typography } from "@mui/material";
-import recipeStore from "./recipeStore";
+import recipeStore from "../store/recipeStore";
 import { Outlet } from "react-router";
 import Recipe from "./recipe";
 

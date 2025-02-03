@@ -3,7 +3,7 @@ import { Box, Button, Modal, TextField, Typography } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { array, object, string } from "yup";
-import recipeStore, { RecipeType } from "./recipeStore";
+import recipeStore, { RecipeType } from "../store/recipeStore";
 import { observer } from "mobx-react-lite";
 import { IdContext } from "../RouterComponents/appLayout";
 const style = {
